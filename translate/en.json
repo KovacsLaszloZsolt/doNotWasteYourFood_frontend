@@ -1,3 +1,31 @@
 {
-  "greetings": "Hello world"
+  "access": {
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "or": "Or"
+  },
+  "authentication": {
+    "subTitle": {
+      "signIn": "Please sign in to continue",
+      "signUp": "Create an account"
+    },
+    "forgotPassword": "Forgot your password?",
+    "doNotHaveAnAccount": "Don't have an account?",
+    "haveAnAccount": "Have an account?"
+  },
+  "form": {
+    "input": {
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password"
+    },
+    "errors": {
+      "invalid": "{{field}} is invalid",
+      "required": "{{field}} is required",
+      "minLength": "{{field}} must be at least {{length}} characters",
+      "match": "{{field}} must match {{match}}",
+      "signIn": "Invalid email or password",
+      "signUp": "Email already exists"
+    }
+  }
 }
