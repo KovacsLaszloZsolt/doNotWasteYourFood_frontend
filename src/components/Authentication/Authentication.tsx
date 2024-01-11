@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { Controller } from 'react-hook-form';
 import { KeyboardAvoidingView, ScrollView, StyleSheet, View } from 'react-native';
 import { Button, HelperText, Text, TextInput } from 'react-native-paper';
-import { AuthenticationTypeEnum, AuthenticationTypeType } from '../../../types/authentication';
+import { AuthenticationTypeEnum, AuthenticationTypeType } from '../../../types/authentication.type';
 import { useAuthentication } from './useAuthentication';
 
 interface AuthenticationProps {
@@ -20,7 +20,6 @@ export const Authentication = ({ type }: AuthenticationProps): ReactElement => {
     showPassword,
     t,
     theme,
-    getValues,
     handleSubmit,
     onSubmit,
     setShowConfirmPassword,

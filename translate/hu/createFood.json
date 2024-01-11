@@ -1,0 +1,11 @@
+{
+  "subTitle": "Új étel és lejárati dátum hozzáadása",
+  "form": {
+    "name": "Név",
+    "expireDate": "Lejárati dátum",
+    "button": {
+      "create": "Létrehozás",
+      "cancel": "Mégse"
+    }
+  }
+}

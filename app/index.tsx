@@ -1,29 +1,35 @@
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
-import { useStore } from 'jotai';
+import { changeLanguage } from 'i18next';
+import { useAtom } from 'jotai';
 import React, { ReactElement, useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import { getCurrentUser } from '../src/api/authentication.api';
 import { Access } from '../src/components/Access/Access';
-import { userAtom } from '../src/store/store';
-import { fetchHandler } from '../src/utils/fetchHandler';
-import { User } from '../types/authentication';
+import { UnauthorizedErrorAlert } from '../src/components/UnauthorizedErrorAlert/UnauthorizedErrorAlert';
+import { appLocaleAtom, userAtom } from '../src/store/store';
+import { getSystemLangCode } from '../src/utils/getSystemLangCode';
 
 export default function HomePage(): ReactElement {
   const [isLoading, setIsLoading] = useState(true);
-  const store = useStore();
-  const user = store.get(userAtom);
+  const [user, setUser] = useAtom(userAtom);
+  const [, setAppLocale] = useAtom(appLocaleAtom);
+
+  const local = useLocalSearchParams();
 
   useEffect(() => {
     SecureStore.getItemAsync('authToken')
       .then((authToken) => {
-        if (authToken) {
-          fetchHandler<User>(getCurrentUser(authToken))
+        if (!authToken) {
+          setUser(undefined);
+          setIsLoading(false);
+        } else {
+          getCurrentUser()
             .then((res) => {
-              if (res) {
-                store.set(userAtom, res);
-                router.push('home');
+              if (res.data) {
+                setUser(res.data);
+                router.push('user/home');
               } else {
                 setIsLoading(false);
               }
@@ -32,19 +38,38 @@ export default function HomePage(): ReactElement {
               SecureStore.deleteItemAsync('authToken');
               setIsLoading(false);
             });
-        } else {
-          setIsLoading(false);
         }
       })
       .catch(() => {
         SecureStore.deleteItemAsync('authToken');
+        setUser(undefined);
         setIsLoading(false);
       });
-  }, [store]);
+  }, [setUser]);
+
+  useEffect(() => {
+    SecureStore.getItemAsync('locale')
+      .then((locale) => {
+        if (locale) {
+          changeLanguage(locale);
+          setAppLocale(locale);
+          return;
+        }
+
+        const systemLangCode = getSystemLangCode();
+        setAppLocale(systemLangCode);
+      })
+      .catch((error) => {
+        const systemLangCode = getSystemLangCode();
+        setAppLocale(systemLangCode);
+        console.log(error);
+      });
+  }, [setAppLocale]);
 
   return (
     <SafeAreaView style={styles.buttonContainer}>
-      {!isLoading && !user ? <Access /> : <ActivityIndicator animating={true} />}
+      {local.alert && user && <UnauthorizedErrorAlert />}
+      {!isLoading ? <Access /> : <ActivityIndicator animating={true} />}
     </SafeAreaView>
   );
 }

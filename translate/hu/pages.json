@@ -1,0 +1,8 @@
+{
+  "pages": {
+    "home": "Kezdőoldal",
+    "foods": "Élelmiszerek",
+    "createFood": "Élelmiszer hozzáadás",
+    "settings": "Beállítások"
+  }
+}

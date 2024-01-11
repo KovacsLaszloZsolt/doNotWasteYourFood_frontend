@@ -1,0 +1,15 @@
+{
+  "form": {
+    "errors": {
+      "invalid": "{{field}} is invalid",
+      "required": "{{field}} is required",
+      "minLength": "{{field}} must be at least {{length}} characters",
+      "match": "{{field}} must match {{match}}",
+      "signIn": "Invalid email or password",
+      "signUp": "Email already exists"
+    }
+  },
+  "errors": {
+    "sessionExpired": "Your session has expired. Please sign in again."
+  }
+}

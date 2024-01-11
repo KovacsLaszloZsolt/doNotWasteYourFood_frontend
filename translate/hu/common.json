@@ -1,0 +1,15 @@
+{
+  "form": {
+    "errors": {
+      "invalid": "{{field}} érvénytelen",
+      "required": "{{field}} kötelező",
+      "minLength": "{{field}} legalább {{length}} karakter hosszú kell legyen",
+      "match": "{{field}}-nak meg kell egyeznie a(z) {{match}} mezővel",
+      "signIn": "Hibás e-mail vagy jelszó",
+      "signUp": "Az e-mail már létezik"
+    }
+  },
+  "errors": {
+    "sessionExpired": "A munkameneted lejárt. Kérjük, jelentkezz be újra."
+  }
+}

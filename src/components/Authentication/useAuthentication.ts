@@ -19,10 +19,9 @@ import {
   AuthenticationTypeType,
   FormValues,
   Rules
-} from '../../../types/authentication';
+} from '../../../types/authentication.type';
 import { createUser, loginUser } from '../../api/authentication.api';
 import { userAtom } from '../../store/store';
-import { fetchHandler } from '../../utils/fetchHandler';
 
 const PASSWORD_MIN_LENGTH = 6;
 
@@ -46,7 +45,7 @@ interface UseAuthentication {
   setShowPassword: Dispatch<SetStateAction<boolean>>;
 }
 export const useAuthentication = ({ type }: UseAuthenticationProps): UseAuthentication => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['authentication', 'common']);
   const theme = useTheme();
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
@@ -77,19 +76,20 @@ export const useAuthentication = ({ type }: UseAuthenticationProps): UseAuthenti
       let res: AuthenticationResponse;
 
       if (type === AuthenticationTypeEnum.SIGN_UP) {
-        res = await fetchHandler<AuthenticationResponse>(
-          createUser({ ...data, username: data.email })
-        );
+        const { data: resData } = await createUser({ ...data, username: data.email });
+        res = resData;
       } else {
-        res = await fetchHandler<AuthenticationResponse>(
-          loginUser({ identifier: data.email, password: data.password })
-        );
+        const { data: resData } = await loginUser({
+          identifier: data.email,
+          password: data.password
+        });
+        res = resData;
       }
 
       store.set(userAtom, res.user);
       await SecureStore.setItemAsync('authToken', res.jwt);
 
-      router.push('/home');
+      router.push('/user/home');
     } catch (error) {
       setHasError(true);
     }
@@ -99,22 +99,22 @@ export const useAuthentication = ({ type }: UseAuthenticationProps): UseAuthenti
     email: {
       required: {
         value: true,
-        message: t('form.errors.required', { field: t('form.input.email') })
+        message: t('common:form.errors.required', { field: t('form.input.email') })
       },
       pattern: {
-        message: t('form.errors.invalid', { field: t('form.input.email') }),
+        message: t('common:form.errors.invalid', { field: t('form.input.email') }),
         value: REGEX.email
       }
     },
     password: {
       required: {
         value: true,
-        message: t('form.errors.required', { field: t('form.input.password') })
+        message: t('common:form.errors.required', { field: t('form.input.password') })
       },
       minLength: {
         value: PASSWORD_MIN_LENGTH,
-        message: t('form.errors.minLength', {
-          field: t('form.input.password'),
+        message: t('common:form.errors.minLength', {
+          field: t('common:form.input.password'),
           length: PASSWORD_MIN_LENGTH
         })
       }
@@ -139,6 +139,7 @@ export const useAuthentication = ({ type }: UseAuthenticationProps): UseAuthenti
         })
     }
   };
+
   return {
     control,
     errors,

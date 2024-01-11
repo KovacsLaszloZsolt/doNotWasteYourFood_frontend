@@ -20,5 +20,5 @@ export const getEnv = (
 };
 
 export const config = Object.freeze({
-  backendUrl: getEnv('string', process.env.EXPO_BACKEND_URL, 'http://127.0.0.1:1337')
+  backendUrl: getEnv('string', process.env.EXPO_BACKEND_URL, 'http://192.168.10.142:1337')
 });

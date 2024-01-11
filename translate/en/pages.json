@@ -1,0 +1,8 @@
+{
+  "pages": {
+    "home": "Home",
+    "foods": "Foods",
+    "createFood": "Create food",
+    "settings": "Settings"
+  }
+}

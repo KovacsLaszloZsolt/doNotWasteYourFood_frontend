@@ -1,0 +1,32 @@
+{
+  "access": {
+    "signIn": "Bejelentkezés",
+    "signUp": "Regisztráció",
+    "or": "Vagy"
+  },
+  "authentication": {
+    "subTitle": {
+      "signIn": "Kérjük, jelentkezzen be a folytatáshoz",
+      "signUp": "Hozzon létre egy fiókot"
+    },
+    "forgotPassword": "Elfelejtette a jelszavát?",
+    "doNotHaveAnAccount": "Nincs fiókja?",
+    "haveAnAccount": "Van fiókja?"
+  },
+  "form": {
+    "input": {
+      "email": "E-mail",
+      "password": "Jelszó",
+      "confirmPassword": "Jelszó megerősítése"
+    },
+    "errors": {
+      "invalid": "{{field}} érvénytelen",
+      "required": "{{field}} kötelező",
+      "minLength": "{{field}} legalább {{length}} karakter hosszú kell legyen",
+      "match": "{{field}}-nak meg kell egyeznie a(z) {{match}} mezővel",
+      "signIn": "Hibás e-mail vagy jelszó",
+      "signUp": "Az e-mail már létezik",
+      "createFood": "Hiba történt az étel létrehozása közben"
+    }
+  }
+}

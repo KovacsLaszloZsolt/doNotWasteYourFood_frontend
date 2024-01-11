@@ -2,11 +2,10 @@ import { router } from 'expo-router';
 import React, { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet } from 'react-native';
-import { Button, Text, useTheme } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 
 export const Access = (): ReactElement => {
-  const { t } = useTranslation();
-  const theme = useTheme();
+  const { t } = useTranslation('authentication');
 
   return (
     <>

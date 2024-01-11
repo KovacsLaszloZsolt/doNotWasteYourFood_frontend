@@ -1,0 +1,11 @@
+{
+  "subTitle": "Add a new food and expire date",
+  "form": {
+    "name": "Name",
+    "expireDate": "Expire date",
+    "button": {
+      "create": "Create",
+      "cancel": "Cancel"
+    }
+  }
+}
