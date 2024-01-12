@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, View } from 'react-native';
 import { ActivityIndicator, DataTable, MD2Colors, Switch, Text } from 'react-native-paper';
 import { SortByKeysEnum } from '../../enums/sortByOptions';
 import { FoodRow } from './FoodRow';
@@ -30,16 +30,14 @@ export const FoodList = (): ReactElement => {
   return (
     <>
       {isFetching ? (
-        <View style={{ flex: 1, justifyContent: 'center' }}>
+        <View className="flex-1 justify-center">
           <ActivityIndicator animating={true} color={MD2Colors.red800} />
         </View>
       ) : (
         <ScrollView>
-          <DataTable style={styles.dataTable}>
-            <DataTable.Row style={{ alignItems: 'flex-end' }}>
-              <Pressable
-                style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}
-              >
+          <DataTable className="flex-1">
+            <DataTable.Row className="items-end">
+              <Pressable className="justify-center flex-row items-center">
                 <Text>{t('showAteFoods')}</Text>
                 <Switch
                   style={{
@@ -58,14 +56,14 @@ export const FoodList = (): ReactElement => {
                 {t('name')}
               </DataTable.Title>
               <DataTable.Title
+                className="justify-center"
                 sortDirection={sortBy[SortByKeysEnum.EXPIRED_DATE]}
-                style={styles.header}
                 onPress={() => handleSortByOnPress(SortByKeysEnum.EXPIRED_DATE)}
               >
                 {t('expireDate')}
               </DataTable.Title>
               <DataTable.Title
-                style={styles.lastHeader}
+                className="justify-end pr-2"
                 sortDirection={sortBy[SortByKeysEnum.IS_EATEN]}
                 onPress={() => handleSortByOnPress(SortByKeysEnum.IS_EATEN)}
               >
@@ -101,16 +99,3 @@ export const FoodList = (): ReactElement => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  dataTable: {
-    flex: 1
-  },
-  header: {
-    justifyContent: 'center'
-  },
-  lastHeader: {
-    justifyContent: 'flex-end',
-    paddingRight: 8
-  }
-});

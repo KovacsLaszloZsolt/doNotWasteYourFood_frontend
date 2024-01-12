@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { LanguageDropdown } from '../../src/components/LanguageDropdown/LanguageDropdown';
+import { LanguageDropdown } from '../../components/LanguageDropdown/LanguageDropdown';
 
 const Settings = (): ReactElement => {
   return <LanguageDropdown />;

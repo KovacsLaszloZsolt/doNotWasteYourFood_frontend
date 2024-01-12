@@ -1,6 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
 import React, { ReactElement, useCallback, useState } from 'react';
-import { StyleSheet } from 'react-native';
 import { Checkbox, DataTable } from 'react-native-paper';
 import { Food } from '../../../types/food.type';
 import { updateFood } from '../../api/food.api';
@@ -30,8 +29,8 @@ export const FoodRow = ({ food }: FoodRowProps): ReactElement => {
   return (
     <DataTable.Row key={food.id}>
       <DataTable.Cell>{food.name}</DataTable.Cell>
-      <DataTable.Cell style={styles.rowCell}>{food.expireDate.toString()}</DataTable.Cell>
-      <DataTable.Cell style={styles.lastRowCell}>
+      <DataTable.Cell className="justify-center">{food.expireDate.toString()}</DataTable.Cell>
+      <DataTable.Cell className="justify-end">
         <Checkbox.Android
           status={isChecked ? 'checked' : 'unchecked'}
           onPress={handleCheckboxPress}
@@ -40,12 +39,3 @@ export const FoodRow = ({ food }: FoodRowProps): ReactElement => {
     </DataTable.Row>
   );
 };
-
-const styles = StyleSheet.create({
-  rowCell: {
-    justifyContent: 'center'
-  },
-  lastRowCell: {
-    justifyContent: 'flex-end'
-  }
-});

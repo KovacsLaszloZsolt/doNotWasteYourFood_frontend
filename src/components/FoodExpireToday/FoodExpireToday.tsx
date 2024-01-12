@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { isEmpty } from 'lodash';
 import { ReactElement, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { ActivityIndicator, Chip, IconButton, Surface, Text } from 'react-native-paper';
 import { getFoods } from '../../api/food.api';
 import { QueryKeysEnum } from '../../enums/queryKeys';
@@ -31,12 +31,12 @@ export const FoodExpireToday = (): ReactElement => {
 
   const [isOpen, setIsOpen] = useState(true);
   return (
-    <Surface elevation={4} style={{ margin: 8, padding: 8, borderRadius: 16 }}>
+    <Surface elevation={4} className="m-2 p-2 rounded-2xl">
       {isFetching || isLoading ? (
         <ActivityIndicator animating />
       ) : (
         <View>
-          <Text variant="headlineSmall" style={styles.title}>
+          <Text variant="headlineSmall" className="text-center">
             {t('foodsExpireToday')}
           </Text>
           <IconButton
@@ -44,23 +44,17 @@ export const FoodExpireToday = (): ReactElement => {
             iconColor="black"
             size={24}
             onPress={() => setIsOpen((prev) => !prev)}
-            style={styles.indicatorButton}
+            className="absolute -top-2 -right-2"
           />
           {isOpen && (
-            <View style={styles.foodsContainer}>
+            <View className="flex-row gap-2 flex-wrap mt-4">
               {isEmpty(foodsExpireToday) ? (
-                <View style={{ width: '100%', alignItems: 'center' }}>
+                <View className="w-full items-center">
                   <Text>{t('noFoodExpireToday')}</Text>
                 </View>
               ) : (
                 foodsExpireToday?.map((food) => (
-                  <Chip
-                    key={food.id}
-                    mode="flat"
-                    compact
-                    elevated
-                    style={{ backgroundColor: 'red' }}
-                  >
+                  <Chip key={food.id} mode="flat" compact elevated className="bg-slate-400">
                     {food.name}
                   </Chip>
                 ))
@@ -72,9 +66,3 @@ export const FoodExpireToday = (): ReactElement => {
     </Surface>
   );
 };
-
-const styles = StyleSheet.create({
-  title: { textAlign: 'center' },
-  indicatorButton: { position: 'absolute', right: -8, top: -8 },
-  foodsContainer: { flexDirection: 'row', gap: 5, flexWrap: 'wrap', marginTop: 16 }
-});

@@ -1,9 +1,10 @@
 import { router } from 'expo-router';
 import React, { ReactElement } from 'react';
 import { Controller } from 'react-hook-form';
-import { KeyboardAvoidingView, StyleSheet, View } from 'react-native';
-import { Button, HelperText, Text, TextInput, useTheme } from 'react-native-paper';
+import { KeyboardAvoidingView, View } from 'react-native';
+import { Button, Text, TextInput, useTheme } from 'react-native-paper';
 import { DatePickerModal } from 'react-native-paper-dates';
+import { ErrorText } from '../ErrorText/ErrorText';
 import { useCreateFood } from './useCreateFood';
 
 export const CreateFood = (): ReactElement => {
@@ -27,15 +28,15 @@ export const CreateFood = (): ReactElement => {
   } = useCreateFood();
 
   return (
-    <KeyboardAvoidingView behavior="position" style={styles.container}>
-      <View style={{ gap: 40 }}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title} variant="displayMedium">
+    <KeyboardAvoidingView behavior="position" className="flex-1 bg-white p-5 justify-center">
+      <View className="gap-8">
+        <View className="gap-3">
+          <Text className="font-bold text-sm" variant="displayMedium">
             {t('subTitle')}
           </Text>
         </View>
         <View>
-          <View style={styles.inputContainer}>
+          <View className="gap-3">
             <View>
               <Controller
                 control={control}
@@ -53,10 +54,7 @@ export const CreateFood = (): ReactElement => {
                 )}
                 name="name"
               />
-
-              <HelperText style={styles.errorText} type="error">
-                {errors.name ? errors.name.message : ''}
-              </HelperText>
+              <ErrorText error={errors.name?.message} />
             </View>
 
             <View>
@@ -83,18 +81,12 @@ export const CreateFood = (): ReactElement => {
                 date={getValues('expireDate')}
                 onConfirm={onConfirmSingle}
               />
-              <HelperText style={styles.errorText} type="error">
-                {errors.expireDate ? errors.expireDate.message : ''}
-              </HelperText>
+              <ErrorText error={errors.expireDate?.message} />
             </View>
           </View>
-          {hasError && (
-            <HelperText style={[styles.errorText, { textAlign: 'center' }]} type="error">
-              {t('form.errors.createFood')}
-            </HelperText>
-          )}
+          {hasError && <ErrorText error={t('form.errors.createFood')} className="text-center" />}
         </View>
-        <View style={styles.buttonContainer}>
+        <View className="flex-row-reverse justify-center gap-8">
           <Button mode="contained" onPress={handleSubmit(onSubmit)}>
             {t('form.button.create')}
           </Button>
@@ -113,40 +105,3 @@ export const CreateFood = (): ReactElement => {
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'white',
-    padding: 20,
-    flex: 1,
-    justifyContent: 'center'
-  },
-  titleContainer: {
-    gap: 10
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 14
-  },
-  inputContainer: { gap: 10 },
-  forgetPassword: {
-    marginLeft: 'auto'
-  },
-  doNotHaveAccountContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 10
-  },
-  signUpText: {
-    fontWeight: 'bold'
-  },
-  errorText: {
-    minHeight: 29
-  },
-  buttonContainer: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'center',
-    gap: 30
-  }
-});

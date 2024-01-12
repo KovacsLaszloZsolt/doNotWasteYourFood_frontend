@@ -5,7 +5,7 @@ import React, { ReactElement, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
-import { userAtom } from '../../src/store/store';
+import { userAtom } from '../../store/store';
 
 const _layout = (): ReactElement => {
   const { t } = useTranslation('pages');

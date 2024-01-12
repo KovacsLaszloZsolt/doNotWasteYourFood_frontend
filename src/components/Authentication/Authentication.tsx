@@ -1,9 +1,10 @@
 import { Link } from 'expo-router';
 import React, { ReactElement } from 'react';
 import { Controller } from 'react-hook-form';
-import { KeyboardAvoidingView, ScrollView, StyleSheet, View } from 'react-native';
+import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import { Button, HelperText, Text, TextInput } from 'react-native-paper';
 import { AuthenticationTypeEnum, AuthenticationTypeType } from '../../../types/authentication.type';
+import { ErrorText } from '../ErrorText/ErrorText';
 import { useAuthentication } from './useAuthentication';
 
 interface AuthenticationProps {
@@ -27,11 +28,11 @@ export const Authentication = ({ type }: AuthenticationProps): ReactElement => {
   } = useAuthentication({ type });
 
   return (
-    <KeyboardAvoidingView behavior="padding" style={styles.container}>
-      <ScrollView style={{ flex: 1 }}>
-        <View style={{ gap: 40 }}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title} variant="displayMedium">
+    <KeyboardAvoidingView behavior="padding" className="flex-1 justify-center p-5">
+      <ScrollView className="flex-1">
+        <View className="gap-10">
+          <View className="gap-3">
+            <Text className="font-bold" variant="displayMedium">
               {t(`access.${type}`)}
             </Text>
             <Text variant="headlineSmall" style={{ color: theme.colors.backdrop }}>
@@ -39,7 +40,7 @@ export const Authentication = ({ type }: AuthenticationProps): ReactElement => {
             </Text>
           </View>
           <View>
-            <View style={styles.inputContainer}>
+            <View className="gap-3">
               <View>
                 <Controller
                   control={control}
@@ -57,10 +58,7 @@ export const Authentication = ({ type }: AuthenticationProps): ReactElement => {
                   )}
                   name="email"
                 />
-
-                <HelperText style={styles.errorText} type="error">
-                  {errors.email ? errors.email.message : ''}
-                </HelperText>
+                <ErrorText error={errors.email?.message} />
               </View>
               <View>
                 <Controller
@@ -86,12 +84,10 @@ export const Authentication = ({ type }: AuthenticationProps): ReactElement => {
                   )}
                   name="password"
                 />
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <HelperText style={styles.errorText} type="error">
-                    {errors.password ? errors.password.message : ''}
-                  </HelperText>
+                <View className="flex-row items-center">
+                  <ErrorText error={errors.password?.message} />
                   {type === AuthenticationTypeEnum.SIGN_IN && (
-                    <Link style={styles.forgetPassword} href="/forget-password">
+                    <Link className="ml-auto" href="/forget-password">
                       <HelperText type="info">{t('authentication.forgotPassword')}</HelperText>
                     </Link>
                   )}
@@ -123,22 +119,23 @@ export const Authentication = ({ type }: AuthenticationProps): ReactElement => {
                     name="confirmPassword"
                   />
 
-                  <HelperText style={styles.errorText} type="error">
-                    {errors.confirmPassword ? errors.confirmPassword.message : ''}
-                  </HelperText>
+                  <ErrorText error={errors.confirmPassword?.message} />
                 </View>
               )}
             </View>
             {hasError && (
-              <HelperText style={[styles.errorText, { textAlign: 'center' }]} type="error">
-                {t(`form.errors.${type === AuthenticationTypeEnum.SIGN_IN ? 'signIn' : 'signUp'}`)}
-              </HelperText>
+              <ErrorText
+                className="text-center"
+                error={t(
+                  `form.errors.${type === AuthenticationTypeEnum.SIGN_IN ? 'signIn' : 'signUp'}`
+                )}
+              />
             )}
           </View>
           <Button mode="contained" onPress={handleSubmit(onSubmit)}>
             {t(`access.${type === AuthenticationTypeEnum.SIGN_IN ? 'signIn' : 'signUp'}`)}
           </Button>
-          <View style={styles.doNotHaveAccountContainer}>
+          <View className="flex-row gap-3 items-center justify-center">
             <Text variant="bodyMedium">
               {t(
                 `authentication.${
@@ -147,10 +144,7 @@ export const Authentication = ({ type }: AuthenticationProps): ReactElement => {
               )}
             </Text>
             <Link href={type === AuthenticationTypeEnum.SIGN_IN ? '/signUp' : '/signIn'}>
-              <Text
-                variant="bodyMedium"
-                style={[styles.signUpText, { color: theme.colors.primary }]}
-              >
+              <Text variant="bodyMedium" className="font-bold text-purple-800">
                 {t(`access.${type === AuthenticationTypeEnum.SIGN_IN ? 'signUp' : 'signIn'}`)}
               </Text>
             </Link>
@@ -160,33 +154,3 @@ export const Authentication = ({ type }: AuthenticationProps): ReactElement => {
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20
-  },
-  titleContainer: {
-    gap: 10
-  },
-  title: {
-    fontWeight: 'bold'
-  },
-  inputContainer: { gap: 10 },
-  forgetPassword: {
-    marginLeft: 'auto'
-  },
-  doNotHaveAccountContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 10
-  },
-  signUpText: {
-    fontWeight: 'bold'
-  },
-  errorText: {
-    minHeight: 29
-  }
-});

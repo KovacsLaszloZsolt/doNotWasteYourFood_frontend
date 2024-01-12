@@ -3,13 +3,13 @@ import * as SecureStore from 'expo-secure-store';
 import { changeLanguage } from 'i18next';
 import { useAtom } from 'jotai';
 import React, { ReactElement, useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
-import { getCurrentUser } from '../src/api/authentication.api';
-import { Access } from '../src/components/Access/Access';
-import { UnauthorizedErrorAlert } from '../src/components/UnauthorizedErrorAlert/UnauthorizedErrorAlert';
-import { appLocaleAtom, userAtom } from '../src/store/store';
-import { getSystemLangCode } from '../src/utils/getSystemLangCode';
+import { getCurrentUser } from '../api/authentication.api';
+import { Access } from '../components/Access/Access';
+import { UnauthorizedErrorAlert } from '../components/UnauthorizedErrorAlert/UnauthorizedErrorAlert';
+import { appLocaleAtom, userAtom } from '../store/store';
+import { getSystemLangCode } from '../utils/getSystemLangCode';
 
 export default function HomePage(): ReactElement {
   const [isLoading, setIsLoading] = useState(true);
@@ -62,23 +62,13 @@ export default function HomePage(): ReactElement {
       .catch((error) => {
         const systemLangCode = getSystemLangCode();
         setAppLocale(systemLangCode);
-        console.log(error);
       });
   }, [setAppLocale]);
 
   return (
-    <SafeAreaView style={styles.buttonContainer}>
+    <SafeAreaView className="flex-1 gap-3 items-center justify-center">
       {local.alert && user && <UnauthorizedErrorAlert />}
       {!isLoading ? <Access /> : <ActivityIndicator animating={true} />}
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    flex: 1,
-    gap: 10,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});

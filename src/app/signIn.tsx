@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
-import { Authentication } from '../src/components/Authentication/Authentication';
-import { AuthenticationTypeEnum } from '../types/authentication.type';
+import { AuthenticationTypeEnum } from '../../types/authentication.type';
+import { Authentication } from '../components/Authentication/Authentication';
 
 const SignIn = (): ReactElement => {
   return <Authentication type={AuthenticationTypeEnum.SIGN_IN} />;

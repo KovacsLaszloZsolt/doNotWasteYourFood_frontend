@@ -6,7 +6,7 @@ import { ReactElement } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { PaperProvider } from 'react-native-paper';
 import { registerTranslation } from 'react-native-paper-dates';
-import i18n from '../i18n';
+import i18n from '../../i18n';
 
 registerTranslation('en', {
   save: 'Save',

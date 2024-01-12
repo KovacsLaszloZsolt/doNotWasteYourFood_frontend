@@ -1,8 +1,8 @@
 import { useStore } from 'jotai';
 import React, { ReactElement } from 'react';
-import { FoodExpireToday } from '../../src/components/FoodExpireToday/FoodExpireToday';
-import { FoodRecipe } from '../../src/components/FoodRecipe/FoodRecipe';
-import { userAtom } from '../../src/store/store';
+import { FoodExpireToday } from '../../components/FoodExpireToday/FoodExpireToday';
+import { FoodRecipe } from '../../components/FoodRecipe/FoodRecipe';
+import { userAtom } from '../../store/store';
 
 const Home = (): ReactElement => {
   const user = useStore().get(userAtom);

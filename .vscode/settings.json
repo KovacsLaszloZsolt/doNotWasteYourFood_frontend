@@ -10,5 +10,12 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   // Linting using ESLint.
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"]
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascript",
+    "html": "HTML"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  }
 }

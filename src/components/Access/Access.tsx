@@ -1,7 +1,6 @@
 import { router } from 'expo-router';
 import React, { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 
 export const Access = (): ReactElement => {
@@ -12,7 +11,7 @@ export const Access = (): ReactElement => {
       <Button mode="contained" onPress={() => router.push('signIn')}>
         {t('access.signIn')}
       </Button>
-      <Text style={styles.or} variant="labelLarge">
+      <Text className="uppercase" variant="labelLarge">
         {t('access.or')}
       </Text>
       <Button mode="contained" onPress={() => router.push('signUp')}>
@@ -21,9 +20,3 @@ export const Access = (): ReactElement => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  or: {
-    textTransform: 'uppercase'
-  }
-});

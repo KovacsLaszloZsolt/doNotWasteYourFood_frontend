@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { FoodList } from '../../src/components/FoodList/FoodList';
+import { FoodList } from '../../components/FoodList/FoodList';
 
 const Foods = (): ReactElement => {
   return <FoodList />;

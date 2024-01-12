@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown as RNEDropdown } from 'react-native-element-dropdown';
 import { useTheme } from 'react-native-paper';
-import { appLocaleAtom } from '../../store/store';
 import { languages } from '../../../constants/languages';
+import { appLocaleAtom } from '../../store/store';
 
 export const LanguageDropdown = (): ReactElement => {
   const { t } = useTranslation('settings');
@@ -17,14 +17,12 @@ export const LanguageDropdown = (): ReactElement => {
   const theme = useTheme();
 
   return (
-    <View style={styles.container}>
+    <View className="p-4">
       {appLocale || isFocus ? (
         <Text
-          style={[
-            styles.label,
-            isFocus && { color: 'blue' },
-            { backgroundColor: theme.colors.inverseOnSurface }
-          ]}
+          className={`absolute left-5 top-[6px] z-50 mx-2 text-sm bg-slate-100 ${
+            isFocus ? 'text-blue-800' : 'text-slate-500'
+          }`}
         >
           {t('languageDropdown.label')}
         </Text>
@@ -34,7 +32,6 @@ export const LanguageDropdown = (): ReactElement => {
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
-        iconStyle={styles.iconStyle}
         data={languages}
         search
         maxHeight={300}
@@ -57,9 +54,6 @@ export const LanguageDropdown = (): ReactElement => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 16
-  },
   dropdown: {
     height: 50,
     borderColor: 'gray',
@@ -67,26 +61,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 8
   },
-  icon: {
-    marginRight: 5
-  },
-  label: {
-    position: 'absolute',
-    left: 22,
-    top: 8,
-    zIndex: 999,
-    marginHorizontal: 8,
-    fontSize: 14
-  },
   placeholderStyle: {
     fontSize: 16
   },
   selectedTextStyle: {
     fontSize: 16
-  },
-  iconStyle: {
-    width: 20,
-    height: 20
   },
   inputSearchStyle: {
     height: 40,
