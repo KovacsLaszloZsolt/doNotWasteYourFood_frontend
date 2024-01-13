@@ -11,9 +11,10 @@ export enum SortByOptionsShortenEnum {
 export type SortByOptions = (typeof SortByOptionsEnum)[keyof typeof SortByOptionsEnum];
 
 export enum SortByKeysEnum {
-  NAME = 'name',
+  CATEGORY = 'category',
   EXPIRED_DATE = 'expireDate',
-  IS_EATEN = 'isEaten'
+  IS_EATEN = 'isEaten',
+  NAME = 'name'
 }
 
 export type SortByKeysType = (typeof SortByKeysEnum)[keyof typeof SortByKeysEnum];

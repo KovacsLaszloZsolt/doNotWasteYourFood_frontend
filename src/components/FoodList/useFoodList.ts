@@ -7,13 +7,14 @@ import {
 } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
+import { StrapiMultiResponse } from '../../../types/common.type';
 import { Food, IntSortBy } from '../../../types/food.type';
 import { getFoods } from '../../api/food.api';
 import { QueryKeysEnum } from '../../enums/queryKeys';
 import { SortByKeysType, SortByOptionsEnum } from '../../enums/sortByOptions';
 
 interface UseFoodList {
-  foodsData: InfiniteData<AxiosResponse<StrapiFindResponse<Food>, unknown>, unknown> | undefined;
+  foodsData: InfiniteData<AxiosResponse<StrapiMultiResponse<Food>, unknown>, unknown> | undefined;
   from: number;
   isFetching: boolean;
   itemsPerPage: number;
@@ -27,7 +28,7 @@ interface UseFoodList {
     options?: FetchNextPageOptions | undefined
   ) => Promise<
     InfiniteQueryObserverResult<
-      InfiniteData<AxiosResponse<StrapiFindResponse<Food>, unknown>, unknown>,
+      InfiniteData<AxiosResponse<StrapiMultiResponse<Food>, unknown>, unknown>,
       Error
     >
   >;
@@ -35,7 +36,7 @@ interface UseFoodList {
     options?: FetchPreviousPageOptions | undefined
   ) => Promise<
     InfiniteQueryObserverResult<
-      InfiniteData<AxiosResponse<StrapiFindResponse<Food>, unknown>, unknown>,
+      InfiniteData<AxiosResponse<StrapiMultiResponse<Food>, unknown>, unknown>,
       Error
     >
   >;

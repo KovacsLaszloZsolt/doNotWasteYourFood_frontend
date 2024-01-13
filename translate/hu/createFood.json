@@ -3,6 +3,18 @@
   "form": {
     "name": "Név",
     "expireDate": "Lejárati dátum",
+    "category": {
+      "label": "Kategória",
+      "placeholder": "Válasszon egy kategóriát",
+      "searchPlaceholder": "Keresés a kategóriák között"
+    },
+    "newCategory": {
+      "title": "Új kategória",
+      "snackbar": {
+        "success": "Kategória sikeresen létrehozva",
+        "error": "Hiba történt a kategória létrehozása közben"
+      }
+    },
     "button": {
       "create": "Létrehozás",
       "cancel": "Mégse"

@@ -30,6 +30,7 @@ export const FoodExpireToday = (): ReactElement => {
   const foodsExpireToday = useMemo(() => resData?.data.data, [resData]);
 
   const [isOpen, setIsOpen] = useState(true);
+
   return (
     <Surface elevation={4} className="m-2 p-2 rounded-2xl">
       {isFetching || isLoading ? (

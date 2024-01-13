@@ -3,6 +3,7 @@
     "home": "Home",
     "foods": "Foods",
     "createFood": "Create food",
-    "settings": "Settings"
+    "settings": "Settings",
+    "manageCategories": "Manage categories"
   }
 }

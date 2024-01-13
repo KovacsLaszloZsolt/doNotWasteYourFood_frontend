@@ -1,6 +1,7 @@
 {
   "showAteFoods": "Elfogyasztott ételeket mutatása",
   "name": "Név",
+  "category": "Kategória",
   "expireDate": "Lejárati dátum",
   "ate": "Elfogyasztva",
   "rowsPerPage": "Sorok száma oldalanként"

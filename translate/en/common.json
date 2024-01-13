@@ -11,5 +11,12 @@
   },
   "errors": {
     "sessionExpired": "Your session has expired. Please sign in again."
+  },
+  "customDropdown": {
+    "placeholder": "Select an option",
+    "searchPlaceholder": "Search"
+  },
+  "snackbar": {
+    "close": "Close"
   }
 }

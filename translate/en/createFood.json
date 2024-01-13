@@ -3,6 +3,18 @@
   "form": {
     "name": "Name",
     "expireDate": "Expire date",
+    "category": {
+      "label": "Category",
+      "placeholder": "Select a category",
+      "searchPlaceholder": "Search a category"
+    },
+    "newCategory": {
+      "title": "New category",
+      "snackbar": {
+        "success": "Category created successfully",
+        "error": "Error occurred while creating category"
+      }
+    },
     "button": {
       "create": "Create",
       "cancel": "Cancel"

@@ -10,6 +10,9 @@ export const userAtom = atom<User | undefined>(undefined);
 
 export const foodsAtom = atom<Food[]>([]);
 
+export const snackbarMessageAtom = atom<string | null>(null);
+
 store.set(appLocaleAtom, 'en');
 store.set(userAtom, undefined);
 store.set(foodsAtom, []);
+store.set(snackbarMessageAtom, null);

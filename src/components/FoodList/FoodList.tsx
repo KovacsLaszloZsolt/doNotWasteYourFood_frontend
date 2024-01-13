@@ -27,6 +27,7 @@ export const FoodList = (): ReactElement => {
     onShowAteFoodSwitch,
     setPage
   } = useFoodList();
+
   return (
     <>
       {isFetching ? (
@@ -54,6 +55,13 @@ export const FoodList = (): ReactElement => {
                 onPress={() => handleSortByOnPress(SortByKeysEnum.NAME)}
               >
                 {t('name')}
+              </DataTable.Title>
+              <DataTable.Title
+                className="justify-center"
+                sortDirection={sortBy[SortByKeysEnum.CATEGORY]}
+                onPress={() => handleSortByOnPress(SortByKeysEnum.CATEGORY)}
+              >
+                {t('category')}
               </DataTable.Title>
               <DataTable.Title
                 className="justify-center"

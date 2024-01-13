@@ -11,5 +11,12 @@
   },
   "errors": {
     "sessionExpired": "A munkameneted lejárt. Kérjük, jelentkezz be újra."
+  },
+  "customDropdown": {
+    "placeholder": "Válasz egy lehetőséget",
+    "searchPlaceholder": "Keresés"
+  },
+  "snackbar": {
+    "close": "Bezárás"
   }
 }

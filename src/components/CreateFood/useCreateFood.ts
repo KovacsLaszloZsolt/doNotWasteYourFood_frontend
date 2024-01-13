@@ -1,9 +1,9 @@
-import { useQueryClient } from '@tanstack/react-query';
+import { QueryClient, useQuery, useQueryClient } from '@tanstack/react-query';
 import { router, useFocusEffect } from 'expo-router';
 import { TFunction } from 'i18next';
 import { useAtom } from 'jotai';
 import { isEmpty } from 'lodash';
-import { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import { Dispatch, SetStateAction, useCallback, useMemo, useState } from 'react';
 import {
   Control,
   FieldErrors,
@@ -13,19 +13,23 @@ import {
   useForm
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { createFood } from '../../api/food.api';
+import { DropdownOption } from '../../../types/common.type';
+import { createFood, getCategories } from '../../api/food.api';
 import { QueryKeysEnum } from '../../enums/queryKeys';
 import { appLocaleAtom } from '../../store/store';
 
 interface UseCreateFood {
   appLocale: string;
+  categoriesOptions: DropdownOption<number>[];
   control: Control<FormValues, unknown>;
   errors: FieldErrors<FormValues>;
   hasError: boolean;
   isDatePickerOpen: boolean;
+  queryClient: QueryClient;
   rules: { name: { required: RequiredRule }; expireDate: { required: RequiredRule } };
   t: TFunction<[string, string], undefined>;
   getValues: UseFormGetValues<FormValues>;
+  handleCategoryChange: (item: { label: string; value: number }) => void;
   handleSubmit: UseFormHandleSubmit<FormValues, undefined>;
   onConfirmSingle: (params: { date: Date | undefined }) => void;
   onDismissSingle: () => void;
@@ -37,6 +41,7 @@ interface UseCreateFood {
 interface FormValues {
   name: string;
   expireDate: Date | undefined;
+  category: number | undefined;
 }
 
 export const useCreateFood = (): UseCreateFood => {
@@ -47,6 +52,21 @@ export const useCreateFood = (): UseCreateFood => {
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const [hasError, setHasError] = useState(false);
   const queryClient = useQueryClient();
+
+  const { data: categories } = useQuery({
+    queryKey: [QueryKeysEnum.CATEGORIES],
+    queryFn: async () => getCategories()
+  });
+
+  const categoriesOptions = useMemo(
+    () =>
+      (categories?.data.data ?? []).map((category) => ({
+        label: category.name,
+        value: category.id
+      })),
+
+    [categories]
+  );
 
   const rules = {
     name: {
@@ -71,7 +91,8 @@ export const useCreateFood = (): UseCreateFood => {
     const { name, expireDate } = data;
 
     if (!name || !expireDate) return;
-    const food = { name, expireDate };
+
+    const food = { ...data, name, expireDate };
 
     try {
       const res = await createFood(food);
@@ -97,7 +118,8 @@ export const useCreateFood = (): UseCreateFood => {
     reValidateMode: 'onChange',
     defaultValues: {
       name: '',
-      expireDate: undefined
+      expireDate: undefined,
+      category: undefined
     }
   });
 
@@ -113,6 +135,10 @@ export const useCreateFood = (): UseCreateFood => {
     [setIsDatePickerOpen, setValue]
   );
 
+  const handleCategoryChange = (item: DropdownOption<number>): void => {
+    setValue('category', item.value);
+  };
+
   useFocusEffect(
     useCallback(() => {
       return () => {
@@ -122,13 +148,16 @@ export const useCreateFood = (): UseCreateFood => {
   );
   return {
     appLocale,
+    categoriesOptions,
     control,
     errors,
     hasError,
     isDatePickerOpen,
+    queryClient,
     rules,
     t,
     getValues,
+    handleCategoryChange,
     handleSubmit,
     onConfirmSingle,
     onDismissSingle,

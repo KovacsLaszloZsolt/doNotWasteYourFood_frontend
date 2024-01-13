@@ -1,6 +1,7 @@
 {
   "showAteFoods": "Show ate foods",
   "name": "Name",
+  "category": "Category",
   "expireDate": "Expire date",
   "ate": "Ate",
   "rowsPerPage": "Rows per page"

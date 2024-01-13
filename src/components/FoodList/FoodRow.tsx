@@ -29,6 +29,7 @@ export const FoodRow = ({ food }: FoodRowProps): ReactElement => {
   return (
     <DataTable.Row key={food.id}>
       <DataTable.Cell>{food.name}</DataTable.Cell>
+      <DataTable.Cell className="justify-center">{food.category?.name}</DataTable.Cell>
       <DataTable.Cell className="justify-center">{food.expireDate.toString()}</DataTable.Cell>
       <DataTable.Cell className="justify-end">
         <Checkbox.Android
