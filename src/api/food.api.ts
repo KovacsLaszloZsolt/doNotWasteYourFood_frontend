@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+import { format } from 'date-fns';
 import { StrapiMultiResponse, StrapiSingleResponse } from '../../types/common.type';
 import { Category, Food, FoodBase, IntSortBy } from '../../types/food.type';
 import {
@@ -15,20 +16,26 @@ export const createFood = async (
   return api.post('/foods', { data: food });
 };
 
+const date = format(new Date(), 'yyyy-MM-dd');
+
 export const getFoods = async ({
   page,
   pageSize,
   sortBy,
   showAteFood,
+  showExpiredFood,
   otherFilters
 }: {
   page: number;
   pageSize: number;
   sortBy: IntSortBy;
-  showAteFood: boolean;
+  showAteFood?: boolean;
+  showExpiredFood?: boolean;
   otherFilters?: string;
 }): Promise<AxiosResponse<StrapiMultiResponse<Food>>> => {
   let options = showAteFood ? '' : '&filters[isEaten]=false';
+
+  options += showExpiredFood ? '' : `&filters[expireDate][$gte]=${date}`;
 
   if (otherFilters) options += `${otherFilters}`;
   const [key, value] = Object.entries(sortBy)[0] as [SortByKeysType, SortByOptions];
@@ -56,4 +63,14 @@ export const createCategory = async (
   category: Pick<Category, 'name'>
 ): Promise<AxiosResponse<StrapiSingleResponse<Category>>> => {
   return api.post('/categories', { data: category });
+};
+
+export const updateCategory = async (
+  data: Pick<Category, 'id' | 'name'>
+): Promise<AxiosResponse<unknown>> => {
+  return api.put(`/categories/${data.id}`, { data });
+};
+
+export const deleteCategory = async (id: number): Promise<AxiosResponse<unknown>> => {
+  return api.delete(`/categories/${id}`);
 };

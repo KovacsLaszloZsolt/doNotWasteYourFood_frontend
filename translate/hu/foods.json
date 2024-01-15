@@ -1,5 +1,6 @@
 {
   "showAteFoods": "Elfogyasztott ételeket mutatása",
+  "showExpiredFoods": "Lejárt ételeket mutatása",
   "name": "Név",
   "category": "Kategória",
   "expireDate": "Lejárati dátum",

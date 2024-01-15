@@ -1,4 +1,4 @@
-import { QueryClient, useQuery, useQueryClient } from '@tanstack/react-query';
+import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { router, useFocusEffect } from 'expo-router';
 import { TFunction } from 'i18next';
 import { useAtom } from 'jotai';
@@ -14,7 +14,8 @@ import {
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { DropdownOption } from '../../../types/common.type';
-import { createFood, getCategories } from '../../api/food.api';
+import { useCategories } from '../../QueryHooks/useCategories';
+import { createFood } from '../../api/food.api';
 import { QueryKeysEnum } from '../../enums/queryKeys';
 import { appLocaleAtom } from '../../store/store';
 
@@ -53,14 +54,11 @@ export const useCreateFood = (): UseCreateFood => {
   const [hasError, setHasError] = useState(false);
   const queryClient = useQueryClient();
 
-  const { data: categories } = useQuery({
-    queryKey: [QueryKeysEnum.CATEGORIES],
-    queryFn: async () => getCategories()
-  });
+  const { categories } = useCategories({});
 
   const categoriesOptions = useMemo(
     () =>
-      (categories?.data.data ?? []).map((category) => ({
+      (categories?.data ?? []).map((category) => ({
         label: category.name,
         value: category.id
       })),
@@ -146,6 +144,7 @@ export const useCreateFood = (): UseCreateFood => {
       };
     }, [reset])
   );
+
   return {
     appLocale,
     categoriesOptions,

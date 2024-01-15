@@ -1,0 +1,17 @@
+{
+  "edit": {
+    "title": "Szerkesztés",
+    "success": "Kategória sikeresen frissítve!",
+    "error": "Hiba történt a kategória frissítése közben!"
+  },
+  "delete": {
+    "title": "Törlés",
+    "success": "Kategória sikeresen törölve!",
+    "error": "Hiba történt a kategória törlése közben!"
+  },
+  "deleteConfirmModal": {
+    "title": "Kategória törlése",
+    "description": "Biztosan törölni szeretné a(z) {{name}} kategóriát?",
+    "confirmButtonText": "Törlés"
+  }
+}

@@ -1,9 +1,10 @@
 {
   "pages": {
-    "home": "Home",
-    "foods": "Foods",
     "createFood": "Create food",
+    "foods": "Foods",
+    "home": "Home",
+    "manageCategories": "Manage categories",
     "settings": "Settings",
-    "manageCategories": "Manage categories"
+    "shoppingList": "Shopping list"
   }
 }

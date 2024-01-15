@@ -1,9 +1,11 @@
+import { router } from 'expo-router';
 import React, { ReactElement } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Text } from 'react-native-paper';
 import { LanguageDropdown } from '../../components/LanguageDropdown/LanguageDropdown';
-import { router } from 'expo-router';
 
 const Settings = (): ReactElement => {
+  const { t } = useTranslation('pages');
   return (
     <>
       <LanguageDropdown />
@@ -12,7 +14,7 @@ const Settings = (): ReactElement => {
         className="p-4 underline"
         onPress={() => router.push('/user/manageCategories')}
       >
-        Manage categories
+        {t('pages.manageCategories')}{' '}
       </Text>
     </>
   );

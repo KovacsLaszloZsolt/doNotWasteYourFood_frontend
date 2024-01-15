@@ -47,8 +47,8 @@ interface UseAuthentication {
 export const useAuthentication = ({ type }: UseAuthenticationProps): UseAuthentication => {
   const { t } = useTranslation(['authentication', 'common']);
   const theme = useTheme();
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [hasError, setHasError] = useState(false);
   const store = useStore();
 

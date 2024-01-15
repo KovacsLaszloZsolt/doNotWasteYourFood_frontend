@@ -46,6 +46,7 @@ const _layout = (): ReactElement => {
       >
         <Tabs.Screen name="home" options={{ title: t('pages.home') }} />
         <Tabs.Screen name="foods" options={{ title: t('pages.foods') }} />
+        <Tabs.Screen name="shoppingList" options={{ title: t('pages.shoppingList') }} />
         <Tabs.Screen name="scan" options={{ title: t('pages.scan') }} />
         <Tabs.Screen name="settings" options={{ title: t('pages.settings') }} />
         <Tabs.Screen name="createFood" options={{ href: null, title: t('pages.createFood') }} />

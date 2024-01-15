@@ -22,6 +22,7 @@ interface UseFoodList {
   numberOfItemsPerPageList: number[];
   page: number;
   showAteFood: boolean;
+  showExpiredFood: boolean;
   sortBy: IntSortBy;
   to: number;
   fetchNextPage: (
@@ -43,6 +44,7 @@ interface UseFoodList {
   handleSortByOnPress: (key: SortByKeysType) => void;
   onItemsPerPageChange: Dispatch<SetStateAction<number>>;
   onShowAteFoodSwitch: () => void;
+  onShowExpiredFoodSwitch: () => void;
   setPage: Dispatch<SetStateAction<number>>;
 }
 
@@ -51,7 +53,10 @@ export const useFoodList = (): UseFoodList => {
   const [numberOfItemsPerPageList] = useState([10, 20, 30]);
   const [itemsPerPage, onItemsPerPageChange] = useState(numberOfItemsPerPageList[0]);
   const [showAteFood, setShowAteFood] = useState(true);
+  const [showExpiredFood, setShowExpiredFood] = useState(false);
   const [sortBy, setSortBy] = useState<IntSortBy>({ expireDate: SortByOptionsEnum.ASCENDING });
+
+  const onShowExpiredFoodSwitch = (): void => setShowExpiredFood((previousState) => !previousState);
 
   const onShowAteFoodSwitch = (): void => setShowAteFood((previousState) => !previousState);
 
@@ -76,9 +81,9 @@ export const useFoodList = (): UseFoodList => {
     fetchNextPage,
     fetchPreviousPage
   } = useInfiniteQuery({
-    queryKey: [QueryKeysEnum.FOODS, itemsPerPage, sortBy, showAteFood],
+    queryKey: [QueryKeysEnum.FOODS, itemsPerPage, sortBy, showAteFood, showExpiredFood],
     queryFn: async ({ pageParam: page }) =>
-      getFoods({ page, pageSize: itemsPerPage, sortBy, showAteFood }),
+      getFoods({ page, pageSize: itemsPerPage, sortBy, showAteFood, showExpiredFood }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, _allPages, lastPageParam) => {
       if (lastPage.data.data.length !== itemsPerPage) {
@@ -118,6 +123,7 @@ export const useFoodList = (): UseFoodList => {
     numberOfItemsPerPageList,
     page,
     showAteFood,
+    showExpiredFood,
     sortBy,
     to,
     fetchNextPage,
@@ -125,6 +131,7 @@ export const useFoodList = (): UseFoodList => {
     handleSortByOnPress,
     onItemsPerPageChange,
     onShowAteFoodSwitch,
+    onShowExpiredFoodSwitch,
     setPage
   };
 };

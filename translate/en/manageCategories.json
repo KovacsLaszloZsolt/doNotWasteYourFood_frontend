@@ -1,0 +1,17 @@
+{
+  "edit": {
+    "title": "Edit",
+    "success": "Category updated successfully!",
+    "error": "Error occurred while updating category!"
+  },
+  "delete": {
+    "title": "Delete",
+    "success": "Category deleted successfully!",
+    "error": "Error occurred while deleting category!"
+  },
+  "deleteConfirmModal": {
+    "title": "Delete category",
+    "description": "Are you sure you want to delete {{name}} category?",
+    "confirmButtonText": "Delete"
+  }
+}

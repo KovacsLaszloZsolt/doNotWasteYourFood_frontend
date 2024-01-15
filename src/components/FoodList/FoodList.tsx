@@ -1,13 +1,19 @@
-import React, { ReactElement } from 'react';
+import { useAtom } from 'jotai';
+import React, { ReactElement, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, View } from 'react-native';
 import { ActivityIndicator, DataTable, MD2Colors, Switch, Text } from 'react-native-paper';
 import { SortByKeysEnum } from '../../enums/sortByOptions';
+import { appLocaleAtom } from '../../store/store';
 import { FoodRow } from './FoodRow';
 import { useFoodList } from './useFoodList';
 
 export const FoodList = (): ReactElement => {
   const { t } = useTranslation('foods');
+  const [appLocale] = useAtom(appLocaleAtom);
+
+  const isAppLocaleEn = useMemo(() => appLocale === 'en', [appLocale]);
+  const isAppLocaleHu = useMemo(() => appLocale === 'hu', [appLocale]);
 
   const {
     foodsData,
@@ -18,6 +24,7 @@ export const FoodList = (): ReactElement => {
     numberOfItemsPerPageList,
     page,
     showAteFood,
+    showExpiredFood,
     sortBy,
     to,
     fetchNextPage,
@@ -25,6 +32,7 @@ export const FoodList = (): ReactElement => {
     handleSortByOnPress,
     onItemsPerPageChange,
     onShowAteFoodSwitch,
+    onShowExpiredFoodSwitch,
     setPage
   } = useFoodList();
 
@@ -37,18 +45,46 @@ export const FoodList = (): ReactElement => {
       ) : (
         <ScrollView>
           <DataTable className="flex-1">
-            <DataTable.Row className="items-end">
-              <Pressable className="justify-center flex-row items-center">
-                <Text>{t('showAteFoods')}</Text>
+            <DataTable.Row className={`${isAppLocaleHu ? 'items-end' : ''}`}>
+              <Pressable
+                className={`flex-row justify-end items-center ${isAppLocaleEn ? 'mr-auto' : ''}`}
+              >
+                <Text>{t('showExpiredFoods')}</Text>
                 <Switch
                   style={{
                     transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }]
                   }}
-                  value={showAteFood}
-                  onValueChange={onShowAteFoodSwitch}
+                  value={showExpiredFood}
+                  onValueChange={onShowExpiredFoodSwitch}
                 />
               </Pressable>
+              {isAppLocaleEn && (
+                <Pressable className="justify-end flex-row items-center">
+                  <Text>{t('showAteFoods')}</Text>
+                  <Switch
+                    style={{
+                      transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }]
+                    }}
+                    value={showAteFood}
+                    onValueChange={onShowAteFoodSwitch}
+                  />
+                </Pressable>
+              )}
             </DataTable.Row>
+            {isAppLocaleHu && (
+              <DataTable.Row className="items-end">
+                <Pressable className="justify-end flex-row items-center">
+                  <Text>{t('showAteFoods')}</Text>
+                  <Switch
+                    style={{
+                      transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }]
+                    }}
+                    value={showAteFood}
+                    onValueChange={onShowAteFoodSwitch}
+                  />
+                </Pressable>
+              </DataTable.Row>
+            )}
             <DataTable.Header>
               <DataTable.Title
                 sortDirection={sortBy[SortByKeysEnum.NAME]}

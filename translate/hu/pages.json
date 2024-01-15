@@ -1,9 +1,10 @@
 {
   "pages": {
-    "home": "Kezdőoldal",
-    "foods": "Élelmiszerek",
     "createFood": "Élelmiszer hozzáadás",
+    "foods": "Élelmiszerek",
+    "home": "Kezdőoldal",
+    "manageCategories": "Kategóriák kezelése",
     "settings": "Beállítások",
-    "manageCategories": "Kategóriák kezelése"
+    "shoppingList": "Bevásárlólista"
   }
 }

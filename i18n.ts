@@ -8,6 +8,7 @@ import enCommon from './translate/en/common.json';
 import enCreateFood from './translate/en/createFood.json';
 import enFoods from './translate/en/foods.json';
 import enHome from './translate/en/home.json';
+import enManageCategories from './translate/en/manageCategories.json';
 import enPages from './translate/en/pages.json';
 import enSettings from './translate/en/settings.json';
 import huAuthentication from './translate/hu/authentication.json';
@@ -15,6 +16,7 @@ import huCommon from './translate/hu/common.json';
 import huCreateFood from './translate/hu/createFood.json';
 import huFoods from './translate/hu/foods.json';
 import huHome from './translate/hu/home.json';
+import huManageCategories from './translate/hu/manageCategories.json';
 import huPages from './translate/hu/pages.json';
 import huSettings from './translate/hu/settings.json';
 
@@ -29,7 +31,6 @@ i18n.use(initReactI18next).init({
     // We disable this because it's not required, given that react already scapes the text
     escapeValue: false
   },
-  // resources: ['en', 'hu']
   // Here you can add all your supported languages
   resources: {
     en: {
@@ -38,6 +39,7 @@ i18n.use(initReactI18next).init({
       createFood: enCreateFood,
       foods: enFoods,
       home: enHome,
+      manageCategories: enManageCategories,
       pages: enPages,
       settings: enSettings
     },
@@ -47,9 +49,10 @@ i18n.use(initReactI18next).init({
       createFood: huCreateFood,
       foods: huFoods,
       home: huHome,
+      manageCategories: huManageCategories,
       pages: huPages,
-      translation: huCommon,
-      settings: huSettings
+      settings: huSettings,
+      translation: huCommon
     }
   }
 });
